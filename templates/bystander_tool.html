@@ -12,7 +12,7 @@
 </section>
 
 <section class="content-card">
-    <form method="post">
+    <form method="post" aria-label="Bystander support decision form">
         {% csrf_token %}
 
         <p><strong>What best describes your situation?</strong></p>
@@ -37,7 +37,9 @@
             I am unsure whether it is my responsibility
         </label><br><br>
 
-        <button type="submit" class="btn-primary">View guidance</button>
+        <button type="submit" class="btn-primary">
+            View guidance
+        </button>
     </form>
 </section>
 
@@ -51,8 +53,13 @@
     </ul>
 
     <p><strong>You may also wish to:</strong></p>
-    <a href="{% url 'scenario_simulator' %}">Try a scenario</a> |
-    <a href="{% url 'support' %}">View support resources</a>
+    <a href="{% url 'assessment:scenario_simulator' %}">
+        Try a scenario
+    </a>
+    |
+    <a href="{% url 'support' %}">
+        View support resources
+    </a>
 </section>
 {% endif %}
 

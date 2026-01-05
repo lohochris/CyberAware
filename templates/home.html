@@ -3,9 +3,123 @@
 {% block title %}Home | Cyberbullying Awareness{% endblock %}
 
 {% block content %}
-<h1>Understand, Prevent, and Respond to Online Abuse</h1>
-<p>
-    This website provides clear, practical information to help adults
-    recognise online abuse, understand their options, and know where to get support.
-</p>
+
+<section class="home-intro" aria-labelledby="home-heading">
+    <h1 id="home-heading">Understand, Prevent, and Respond to Online Abuse</h1>
+    <p>
+        This website provides clear, practical information to help adults
+        recognise online abuse, understand their options, and know where to get support.
+    </p>
+</section>
+
+<section class="dashboard" aria-label="Main dashboard navigation">
+
+    <div class="dashboard-card primary">
+        <h3>Is This Abuse or Harassment?</h3>
+        <p>
+            Unsure whether something you experienced online counts as abuse or harassment?
+            Explore short scenarios and reflect privately.
+        </p>
+        <a href="{% url 'assessment:decision_tool' %}"
+           class="card-action"
+           aria-label="Start the online abuse self-check tool">
+            Start quick self-check
+        </a>
+    </div>
+
+    <div class="dashboard-card">
+        <h3>What Should I Do Next?</h3>
+        <p>
+            Clear, step-by-step guidance on what actions you can take if you experience
+            online abuse or harassment.
+        </p>
+        <a href="{% url 'assessment:action_pathway' %}"
+           class="card-action"
+           aria-label="View step-by-step guidance on responding to online abuse">
+            View action steps
+        </a>
+    </div>
+
+    <div class="dashboard-card">
+        <h3>Your Rights and Protections</h3>
+        <p>
+            Understand your legal rights, protections, and boundaries when dealing
+            with online abuse.
+        </p>
+        <a href="{% url 'learn' %}"
+           class="card-action"
+           aria-label="Learn about your legal rights and protections online">
+            Learn about your rights
+        </a>
+    </div>
+
+    <div class="dashboard-card">
+        <h3>Looking After Your Wellbeing</h3>
+        <p>
+            Practical advice on managing stress, anxiety, and emotional wellbeing
+            following online abuse or harassment.
+        </p>
+        <a href="{% url 'support' %}"
+           class="card-action"
+           aria-label="Explore mental wellbeing and emotional support resources">
+            Explore wellbeing support
+        </a>
+    </div>
+
+    <div class="dashboard-card">
+        <h3>Learn from Real Situations</h3>
+        <p>
+            Explore real-life examples and interactive scenarios to see how others
+            respond to online abuse.
+        </p>
+        <a href="{% url 'assessment:scenario_simulator' %}"
+           class="card-action"
+           aria-label="View real-life online abuse scenarios">
+            View scenarios
+        </a>
+    </div>
+
+    <div class="dashboard-card subtle">
+        <h3>Support & Practical Tools</h3>
+        <p>
+            Access trusted organisations, reporting guidance, and practical tools
+            you can use at any time.
+        </p>
+        <a href="{% url 'support' %}"
+           class="card-action"
+           aria-label="Access trusted support organisations and practical tools">
+            View support resources
+        </a>
+    </div>
+
+    <!-- New Card 7 -->
+    <div class="dashboard-card">
+        <h3>Is It Worth Reporting?</h3>
+        <p>
+            Not sure whether an incident is serious enough to report?
+            Learn what reporting can achieve and when it may be helpful.
+        </p>
+        <a href="{% url 'assessment:decision_tool' %}"
+           class="card-action"
+           aria-label="Understand whether online abuse incidents are worth reporting">
+            Explore reporting considerations
+        </a>
+    </div>
+
+    <!-- New Card 8 -->
+    <div class="dashboard-card">
+        <h3>If You Witness Online Abuse</h3>
+        <p>
+            Guidance on how to respond safely and responsibly when you see
+            online abuse directed at someone else.
+        </p>
+        <a href="{% url 'assessment:bystander_tool' %}"
+           class="card-action"
+           aria-label="Learn how to respond as a bystander to online abuse">
+            Bystander guidance
+        </a>
+    </div>
+
+</section>
+
 {% endblock %}
