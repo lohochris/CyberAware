@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}Assess | Cyberbullying Awareness{% endblock %}
+
+{% block content %}
+
+<h1>Check Your Understanding</h1>
+
+<p>
+    This short interactive section helps you think through common online situations
+    and understand whether they may be considered online abuse.
+    It is for awareness only and does not provide diagnosis or judgement.
+</p>
+
+<hr>
+
+<section class="scenario-box">
+    <h2>Scenario</h2>
+    <p>
+        You receive repeated messages on social media that insult you and make you feel uncomfortable.
+        The sender continues even after you ask them to stop.
+    </p>
+
+    <p><strong>Do you think this could be considered online abuse?</strong></p>
+
+    <button onclick="showFeedback('yes')" class="btn-primary">Yes</button>
+    <button onclick="showFeedback('no')" class="btn-secondary">No</button>
+    <button onclick="showFeedback('unsure')" class="btn-secondary">Not sure</button>
+
+    <div id="feedback" class="feedback-box" style="display:none;"></div>
+</section>
+
+<div style="margin-top: 2rem;">
+    <a href="/act/" class="btn-primary">See What You Can Do</a>
+</div>
+
+<div class="content-card">
+    <h2>Is This Online Abuse?</h2>
+    <p>
+        Use this interactive tool to reflect on online experiences and understand
+        whether they may constitute online abuse or harassment.
+    </p>
+    <a href="{% url 'decision_tool' %}" class="btn-primary">
+        Start the decision tool
+    </a>
+</div>
+
+<div class="content-card">
+    <h2>Scenario Simulator</h2>
+    <p>
+        Explore how different response choices may play out in common online
+        abuse situations.
+    </p>
+    <a href="{% url 'scenario_simulator' %}" class="btn-primary">
+        Try a scenario
+    </a>
+</div>
+
+<div class="content-card">
+    <h2>Personalised Action Pathway</h2>
+    <p>
+        Receive tailored, step-by-step guidance based on your situation.
+    </p>
+    <a href="{% url 'action_pathway' %}" class="btn-primary">
+        Generate a pathway
+    </a>
+</div>
+
+<div class="content-card">
+    <h2>Bystander Support</h2>
+    <p>
+        Guidance for adults who witness online abuse and are unsure how to respond
+        safely and responsibly.
+    </p>
+    <a href="{% url 'bystander_tool' %}" class="btn-primary">
+        Get bystander guidance
+    </a>
+</div>
+{% endblock %}

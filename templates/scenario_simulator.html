@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Scenario Simulator{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <h1>Scenario Simulator</h1>
+    <p class="page-intro">
+        This activity presents a realistic online situation and allows you to
+        explore possible responses. This is not a test.
+    </p>
+</section>
+
+<section class="content-card">
+    <h2>The Scenario</h2>
+    <p>
+        You receive repeated hostile and mocking comments on a public social media post.
+        The comments are made by someone you do not know personally, but others can see them.
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+        <p><strong>What would you be most likely to do first?</strong></p>
+
+        <label>
+            <input type="radio" name="response" value="ignore" required>
+            Ignore the comments
+        </label><br>
+
+        <label>
+            <input type="radio" name="response" value="respond">
+            Respond and challenge the behaviour
+        </label><br>
+
+        <label>
+            <input type="radio" name="response" value="document">
+            Take screenshots and document the behaviour
+        </label><br>
+
+        <label>
+            <input type="radio" name="response" value="report">
+            Report the comments to the platform
+        </label><br>
+
+        <button type="submit" class="btn-primary">See guidance</button>
+    </form>
+</section>
+
+{% if feedback %}
+<section class="content-card">
+    <h2>Guidance</h2>
+    <p>{{ feedback.message }}</p>
+    <p><em>{{ feedback.note }}</em></p>
+
+    <p><strong>You may wish to:</strong></p>
+    <a href="{% url 'act' %}">Explore response options</a> |
+    <a href="{% url 'support' %}">View support resources</a>
+</section>
+{% endif %}
+
+{% endblock %}

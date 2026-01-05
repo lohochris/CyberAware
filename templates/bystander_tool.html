@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Bystander Support Tool{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <h1>Bystander Support Tool</h1>
+    <p class="page-intro">
+        This tool is for adults who have witnessed online abuse and are unsure
+        how or whether to respond. You are not required to take any action.
+    </p>
+</section>
+
+<section class="content-card">
+    <form method="post">
+        {% csrf_token %}
+
+        <p><strong>What best describes your situation?</strong></p>
+
+        <label>
+            <input type="radio" name="concern" value="unsure" required>
+            I am not sure whether this is serious enough to act
+        </label><br>
+
+        <label>
+            <input type="radio" name="concern" value="fear">
+            I am worried that intervening could make things worse
+        </label><br>
+
+        <label>
+            <input type="radio" name="concern" value="not_know">
+            I do not know the person being targeted
+        </label><br>
+
+        <label>
+            <input type="radio" name="concern" value="responsibility">
+            I am unsure whether it is my responsibility
+        </label><br><br>
+
+        <button type="submit" class="btn-primary">View guidance</button>
+    </form>
+</section>
+
+{% if guidance %}
+<section class="content-card">
+    <h2>{{ guidance.title }}</h2>
+    <ul>
+        {% for step in guidance.steps %}
+        <li>{{ step }}</li>
+        {% endfor %}
+    </ul>
+
+    <p><strong>You may also wish to:</strong></p>
+    <a href="{% url 'scenario_simulator' %}">Try a scenario</a> |
+    <a href="{% url 'support' %}">View support resources</a>
+</section>
+{% endif %}
+
+{% endblock %}

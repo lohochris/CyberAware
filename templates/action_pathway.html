@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Personalised Action Pathway{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <h1>Personalised Action Pathway</h1>
+    <p class="page-intro">
+        Answer a few questions to receive a tailored, step-by-step guide.
+        No information is stored.
+    </p>
+</section>
+
+<section class="content-card">
+    <form method="post">
+        {% csrf_token %}
+
+        <p><strong>Your role</strong></p>
+        <label><input type="radio" name="role" value="victim" required> I am experiencing this</label><br>
+        <label><input type="radio" name="role" value="bystander"> I witnessed this</label><br><br>
+
+        <p><strong>Where is this happening?</strong></p>
+        <select name="platform" required>
+            <option value="">Select one</option>
+            <option value="social">Social media</option>
+            <option value="messaging">Messaging app</option>
+            <option value="email">Email</option>
+            <option value="work">Work / professional platform</option>
+        </select><br><br>
+
+        <p><strong>How serious does it feel right now?</strong></p>
+        <label><input type="radio" name="severity" value="low" required> Low</label><br>
+        <label><input type="radio" name="severity" value="uncertain"> Unsure</label><br>
+        <label><input type="radio" name="severity" value="high"> High</label><br><br>
+
+        <button type="submit" class="btn-primary">Generate pathway</button>
+    </form>
+</section>
+
+{% if pathway %}
+<section class="content-card">
+    <h2>Your Suggested Pathway</h2>
+    <ol>
+        {% for step in pathway %}
+        <li>{{ step }}</li>
+        {% endfor %}
+    </ol>
+
+    <p><strong>Next steps:</strong></p>
+    <a href="{% url 'support' %}">Support resources</a> |
+    <a href="{% url 'act' %}">More actions</a>
+</section>
+{% endif %}
+
+{% endblock %}

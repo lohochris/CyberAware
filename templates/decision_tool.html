@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Is This Online Abuse?{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <h1>Is This Online Abuse?</h1>
+    <p class="page-intro">
+        This interactive tool helps you reflect on online experiences that may feel
+        uncomfortable or confusing. There are no right or wrong answers.
+    </p>
+</section>
+
+<form method="post" class="content-card">
+    {% csrf_token %}
+
+    <p><strong>Have you experienced any of the following?</strong></p>
+
+    <label><input type="checkbox" name="behaviours"> Repeated insulting or abusive messages</label><br>
+    <label><input type="checkbox" name="behaviours"> Threatening or intimidating messages</label><br>
+    <label><input type="checkbox" name="behaviours"> Harassment in public comment sections</label><br>
+    <label><input type="checkbox" name="behaviours"> Sharing personal information without consent</label><br>
+    <label><input type="checkbox" name="behaviours"> Persistent unwanted contact or monitoring</label><br>
+    <label><input type="checkbox" name="behaviours"> Non-consensual sharing or threats to share images</label><br>
+
+    <button type="submit" class="btn-primary">Continue</button>
+</form>
+
+{% if result %}
+<section class="content-card">
+    <h2>What this means</h2>
+    <p>{{ result.message }}</p>
+    <p>{{ result.guidance }}</p>
+
+    <p><strong>Next steps:</strong></p>
+    <a href="{% url 'learn' %}">Learn more</a> |
+    <a href="{% url 'act' %}">Explore your options</a> |
+    <a href="{% url 'support' %}">Find support</a>
+</section>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Cyberbullying Awareness{% endblock %}</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<script src="{% static 'js/main.js' %}"></script>
+<body>
+
+<header class="site-header">
+    <nav class="nav-container">
+        <div class="logo">CyberAware</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/learn/">Learn</a></li>
+            <li><a href="/assess/">Assess</a></li>
+            <li><a href="/act/">Act</a></li>
+            <li><a href="/support/">Support</a></li>
+            <li><a href="/about/">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="content">
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+    <p>
+        This website is for educational purposes only and does not provide counselling,
+        diagnosis, or emergency services.
+    </p>
+    <p>
+        If you are in immediate danger, call <strong>999</strong>.
+        For emotional support, contact <strong>Samaritans (116 123)</strong>.
+    </p>
+    <p>
+        <a href="/privacy/">Privacy & Data Use</a>
+    </p>
+</footer>
+
+
+</body>
+</html>

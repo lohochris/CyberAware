@@ -1,0 +1,255 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #F9FAFB;
+    color: #2E2E2E;
+}
+
+.site-header {
+    background-color: #1F3C88;
+    padding: 1rem 0;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.logo {
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-links a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+.content {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.site-footer {
+    background-color: #E5E7EB;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    display: inline-block;
+    background-color: #1F3C88;
+    color: #FFFFFF;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background-color: #16306d;
+}
+
+.scenario-box {
+    background-color: #FFFFFF;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.feedback-box {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #F0F9FF;
+    border-left: 4px solid #1F3C88;
+}
+
+.step-box {
+    background-color: #FFFFFF;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 5px solid #2EC4B6;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.support-alert {
+    background-color: #FEE2E2;
+    border-left: 5px solid #DC2626;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 6px;
+}
+
+.support-card {
+    background-color: #FFFFFF;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.support-card a {
+    color: #1F3C88;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.support-card a:hover {
+    text-decoration: underline;
+}
+
+/* About Page Styling */
+
+.page-header {
+    margin-bottom: 2.5rem;
+}
+
+.page-header h1 {
+    font-size: 2.2rem;
+    color: #1F3C88;
+    margin-bottom: 0.5rem;
+}
+
+.page-intro {
+    font-size: 1.1rem;
+    color: #6B7280;
+    max-width: 700px;
+}
+
+.content-card {
+    background-color: #FFFFFF;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.content-card h2 {
+    color: #1F3C88;
+    margin-bottom: 1rem;
+}
+
+.content-card p {
+    line-height: 1.7;
+}
+
+.contact-card {
+    border-left: 6px solid #2EC4B6;
+}
+
+.btn-primary {
+    background-color: #1F3C88;
+    color: #ffffff;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 5px;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #162e66;
+}
+
+.cta-links a {
+    font-weight: 600;
+    color: #1F3C88;
+    text-decoration: none;
+    margin-right: 1rem;
+}
+
+/* Learn Page Styling */
+
+.learn-card {
+    background-color: #ffffff;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.learn-card h2 {
+    color: #1F3C88;
+    margin-bottom: 1rem;
+}
+
+.learn-card p {
+    line-height: 1.7;
+    color: #374151;
+}
+
+.learn-list {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+}
+
+.learn-list li {
+    margin-bottom: 0.6rem;
+    line-height: 1.6;
+}
+
+.emphasis-card {
+    border-left: 6px solid #2EC4B6;
+}
+
+/* Compact Educational Video Styling */
+
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 560px;   /* controls video size */
+    margin: 1.5rem auto 0.75rem;
+    padding-bottom: 31.5%; /* smaller than 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Accessible fallback video link styling */
+
+.video-link {
+    max-width: 560px;
+    margin: 0 auto 1.75rem;
+    font-size: 0.9rem;
+    color: #444;
+    text-align: center;
+}
+
+.video-link a {
+    color: #1a73e8;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+.video-link a:hover,
+.video-link a:focus {
+    text-decoration: underline;
+}
