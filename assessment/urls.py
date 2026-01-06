@@ -18,4 +18,5 @@ urlpatterns = [
 
     # Bystander intervention tool
     path("bystander-tool/", views.bystander_tool, name="bystander_tool"),
+    path("legal/", views.legal, name="legal")
 ]

@@ -1,9 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 def assess(request):
     return render(request, "assess.html")
-
 
 def decision_tool(request):
     result = None
@@ -44,49 +43,145 @@ def decision_tool(request):
 
     return render(request, "decision_tool.html", {"result": result})
 
+
 def scenario_simulator(request):
+    scenarios = [
+        {
+            "text": (
+                "You receive repeated messages on social media that insult you and make you feel uncomfortable. "
+                "The sender continues even after you ask them to stop."
+            ),
+            "options": [
+                {"value": "ignore", "label": "Ignore the messages"},
+                {"value": "respond", "label": "Respond and ask them to stop"},
+                {"value": "document", "label": "Save the messages as evidence"},
+                {"value": "report", "label": "Report the behaviour to the platform"},
+            ],
+            "feedback": {
+                "message": (
+                    "When someone continues after you have asked them to stop, this behaviour may reasonably "
+                    "be considered online abuse."
+                ),
+                "note": (
+                    "Documenting behaviour can be helpful if the situation continues or escalates."
+                ),
+            },
+        },
+        {
+            "text": (
+                "Someone repeatedly posts mocking or hostile comments about you in the replies to a public post. "
+                "The comments are visible to others and continue over time."
+            ),
+            "options": [
+                {"value": "ignore", "label": "Ignore the comments"},
+                {"value": "respond", "label": "Respond publicly"},
+                {"value": "document", "label": "Take screenshots of the comments"},
+                {"value": "report", "label": "Report the comments to the platform"},
+            ],
+            "feedback": {
+                "message": (
+                    "Public comments can increase emotional and reputational impact, even if they seem minor "
+                    "when viewed individually."
+                ),
+                "note": (
+                    "Saving evidence may help you decide what action to take later."
+                ),
+            },
+        },
+        {
+            "text": (
+                "You receive messages that imply negative consequences if you do not comply with certain requests. "
+                "The tone feels intimidating, even though no direct threats are made."
+            ),
+            "options": [
+                {"value": "ignore", "label": "Ignore the messages"},
+                {"value": "respond", "label": "Ask for clarification"},
+                {"value": "document", "label": "Save the messages"},
+                {"value": "seek_help", "label": "Seek advice or support"},
+            ],
+            "feedback": {
+                "message": (
+                    "Intimidating or pressuring messages do not need to include explicit threats to be concerning."
+                ),
+                "note": (
+                    "Trusting your discomfort is important when deciding how to respond."
+                ),
+            },
+        },
+        {
+            "text": (
+                "Someone shares your personal information or screenshots of private messages without your consent. "
+                "You did not agree to this information being made public."
+            ),
+            "options": [
+                {"value": "ignore", "label": "Do nothing"},
+                {"value": "document", "label": "Save copies of what was shared"},
+                {"value": "request_removal", "label": "Ask for the content to be removed"},
+                {"value": "report", "label": "Report the content to the platform"},
+            ],
+            "feedback": {
+                "message": (
+                    "Sharing personal information without consent may represent a serious breach of privacy."
+                ),
+                "note": (
+                    "Keeping records can support requests for removal or reporting."
+                ),
+            },
+        },
+        {
+            "text": (
+                "An individual continues to contact you across different platforms, even after you block them. "
+                "New accounts or messages appear over time."
+            ),
+            "options": [
+                {"value": "ignore", "label": "Ignore further contact"},
+                {"value": "document", "label": "Keep a record of all contact"},
+                {"value": "tighten_settings", "label": "Review privacy and security settings"},
+                {"value": "seek_support", "label": "Seek external support"},
+            ],
+            "feedback": {
+                "message": (
+                    "Repeated unwanted contact across platforms may indicate escalation rather than isolated behaviour."
+                ),
+                "note": (
+                    "Support organisations can help you think through next steps."
+                ),
+            },
+        },
+    ]
+
+    step = request.session.get("scenario_step", 0)
     feedback = None
 
     if request.method == "POST":
-        choice = request.POST.get("response")
 
-        feedback_map = {
-            "ignore": {
-                "message": (
-                    "Choosing not to respond can sometimes prevent escalation, "
-                    "especially if the behaviour is low-level or one-off."
-                ),
-                "note": "However, it may not be effective if the behaviour continues."
-            },
-            "respond": {
-                "message": (
-                    "Responding directly may feel instinctive, but it can sometimes "
-                    "escalate the situation."
-                ),
-                "note": "If you respond, keeping messages factual and non-confrontational is safer."
-            },
-            "document": {
-                "message": (
-                    "Documenting evidence is widely recommended and carries low risk."
-                ),
-                "note": "Screenshots and timestamps can be useful if you later decide to report."
-            },
-            "report": {
-                "message": (
-                    "Reporting through platform tools or organisations can be appropriate, "
-                    "particularly for repeated or serious abuse."
-                ),
-                "note": "Outcomes vary, and responses are not always immediate."
-            }
-        }
+        # Restart requested
+        if "restart" in request.POST:
+            request.session["scenario_step"] = 0
+            return redirect("assessment:scenario_simulator")
 
-        feedback = feedback_map.get(choice)
+        # Move to next scenario
+        if "next" in request.POST:
+            step += 1
+            request.session["scenario_step"] = step
+        else:
+            feedback = scenarios[step]["feedback"]
+
+    # Safety guard
+    if step >= len(scenarios):
+        request.session["scenario_step"] = len(scenarios) - 1
 
     return render(
         request,
         "scenario_simulator.html",
-        {"feedback": feedback}
+        {
+            "scenario": scenarios[step],
+            "step": step + 1,
+            "feedback": feedback,
+            "is_last": step == len(scenarios) - 1,
+        },
     )
+
 
 def action_pathway(request):
     pathway = None
@@ -171,3 +266,6 @@ def bystander_tool(request):
         guidance = responses.get(concern)
 
     return render(request, "bystander_tool.html", {"guidance": guidance})
+
+def legal(request):
+    return render(request, "legal.html")

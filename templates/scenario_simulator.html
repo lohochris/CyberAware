@@ -6,55 +6,79 @@
 <section class="page-header">
     <h1>Scenario Simulator</h1>
     <p class="page-intro">
-        This activity presents a realistic online situation and allows you to
-        explore possible responses. This is not a test.
+        This activity presents a series of realistic online situations.
+        There are no right or wrong answers. You may stop at any time.
     </p>
 </section>
 
 <section class="content-card">
-    <h2>The Scenario</h2>
-    <p>
-        You receive repeated hostile and mocking comments on a public social media post.
-        The comments are made by someone you do not know personally, but others can see them.
-    </p>
+    <h2>Scenario {{ step }} of 5</h2>
+
+    <p>{{ scenario.text }}</p>
 
     <form method="post">
         {% csrf_token %}
         <p><strong>What would you be most likely to do first?</strong></p>
 
+        {% for option in scenario.options %}
         <label>
-            <input type="radio" name="response" value="ignore" required>
-            Ignore the comments
+            <input type="radio" name="response" value="{{ option.value }}" required>
+            {{ option.label }}
         </label><br>
+        {% endfor %}
 
-        <label>
-            <input type="radio" name="response" value="respond">
-            Respond and challenge the behaviour
-        </label><br>
-
-        <label>
-            <input type="radio" name="response" value="document">
-            Take screenshots and document the behaviour
-        </label><br>
-
-        <label>
-            <input type="radio" name="response" value="report">
-            Report the comments to the platform
-        </label><br>
-
-        <button type="submit" class="btn-primary">See guidance</button>
+        <button type="submit" class="btn-primary">
+            See guidance
+        </button>
     </form>
 </section>
 
 {% if feedback %}
 <section class="content-card">
-    <h2>Guidance</h2>
+    <h2>Reflection</h2>
     <p>{{ feedback.message }}</p>
     <p><em>{{ feedback.note }}</em></p>
 
-    <p><strong>You may wish to:</strong></p>
-    <a href="{% url 'act' %}">Explore response options</a> |
-    <a href="{% url 'support' %}">View support resources</a>
+    {% if step < 5 %}
+        <p class="motivational-text">
+            You are building awareness step by step.  
+            When you are ready, you can continue to the next situation.
+        </p>
+
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="true">
+            <button type="submit" class="btn-secondary">
+                Continue to next scenario
+            </button>
+        </form>
+   {% else %}
+<p class="motivational-text">
+    You have completed all scenarios.
+    Many adults find it helpful to revisit situations as their understanding grows.
+</p>
+
+<p><strong>You may wish to:</strong></p>
+<p>
+    <a href="{% url 'assessment:action_pathway' %}">
+        Explore response options
+    </a>
+    |
+    <a href="{% url 'support' %}">
+        View support resources
+    </a>
+</p>
+
+<form method="post" style="margin-top: 1rem;">
+    {% csrf_token %}
+    <button type="submit"
+            name="restart"
+            class="btn-secondary"
+            aria-label="Restart the scenario simulator from the beginning">
+        Restart scenarios
+    </button>
+</form>
+{% endif %}
 </section>
 {% endif %}
 

@@ -12,7 +12,7 @@
 <body>
 
 <header class="site-header">
-    <nav class="nav-container">
+    <nav class="nav-container" aria-label="Main navigation">
         <div class="logo">CyberAware</div>
         <ul class="nav-links">
             <li><a href="/">Home</a></li>
@@ -34,15 +34,22 @@
         This website is for educational purposes only and does not provide counselling,
         diagnosis, or emergency services.
     </p>
+
     <p>
         If you are in immediate danger, call <strong>999</strong>.
         For emotional support, contact <strong>Samaritans (116 123)</strong>.
     </p>
-    <p>
-        <a href="/privacy/">Privacy & Data Use</a>
+
+    <p class="footer-links">
+        <a href="/privacy/">Privacy &amp; Data Use</a>
+        &nbsp;|&nbsp;
+        <a href="{% url 'assessment:legal' %}">Legal &amp; Terms</a>
+    </p>
+
+    <p class="footer-copyright">
+        &copy; {% now "Y" %} CyberAware. All rights reserved.
     </p>
 </footer>
-
 
 </body>
 </html>
